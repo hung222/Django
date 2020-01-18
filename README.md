@@ -121,6 +121,38 @@ _Lưu ý: Django trong project này là Django 3_
 + Chạy project: `python manage.py runserver`
 
 ### Tạo Blog
++ Tạo app mới: `python manage.py startapp blog`
++ Cập nhật file settings.py tại dòng lệnh INSTALLED_APPS:
+
+	```py
+		INSTALLED_APPS = [
+		'django.contrib.admin',
+		'django.contrib.auth',
+		'django.contrib.contenttypes',
+		'django.contrib.sessions',
+		'django.contrib.messages',
+		'django.contrib.staticfiles',
+		'home', 
+		'blog',
+	]
+	```
++ Cập nhật lại project: `python manage.py migrate`
+#### Tạo model
+
++ Trong file models.py của app blog tạo model database:
+
+	```py
+	from Django.db import models
+	class Post(models.Model):
+		title 	= models.CharField(max_length=100)
+		content = models.TextField()
+		date    = models.DateTimeField(auto_now_add=True)
+	```
+
++ Cập nhật ứng dụng blog sau khi tạo xong model: `python manage.py makemigrations blog`
++ Cập nhật lại project sau khi cập nhật xong ứng dụng: `python manage.py migrate`
++ Xem và kiểm tra cơ sở dữ liệu sau khi cập nhật xong project.
+
 
 
 
