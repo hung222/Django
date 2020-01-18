@@ -4,7 +4,7 @@
 ### Trên Windows 
 + Cài Python 3.7
 + `pip install django`
-+ Tạo project với thư mục admin: `django-admin startproject mywebsite .`
++ Tạo project đầu tiên: `django-admin startproject mywebsite .`
 ## Tạo ứng dụng:
 + `python manage.py startapp home`
 + Khai báo ứng dụng home cho project tại file settings.py:
