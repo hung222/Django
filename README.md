@@ -151,7 +151,28 @@ _Lưu ý: Django trong project này là Django 3_
 
 + Cập nhật ứng dụng blog sau khi tạo xong model: `python manage.py makemigrations blog`
 + Cập nhật lại project sau khi cập nhật xong ứng dụng: `python manage.py migrate`
-+ Xem và kiểm tra cơ sở dữ liệu sau khi cập nhật xong project.
++ Xem và kiểm tra cơ sở dữ liệu sau khi cập nhật xong project. Ở đây mình dùng SQLite DB
+
+#### Tương tác với Cơ sở dữ liệu trong Django
++ Chạy dòng lệnh sau để tương tác với CSDL: `python manage.py shell`
+
++ Gọi đối tượng model đã tạo trong app ra tương tác với DB:
+
+  ```py
+  >>> from blog.models import Post
+  >>> p = Post()
+  >>> p.title = "Bài viết đầu tiên"
+  >>> p.content = "AI trong thế kỷ 21"
+  >>> p.save()
+  >>> Post.objects.all()
+  >>> p =Post.objects.get(id=1)
+  >>> p.title
+  >>> p.content 
+  >>> p.date
+  >>> p = Post(title = "AI Python", content = "Lập trình Python với Tensorflow")
+  >>> p.save()
+  >>> Post.objects.all()
+  ```
 
 
 
