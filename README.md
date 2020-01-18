@@ -22,7 +22,7 @@
   ```
  
  + Cập nhật project: `python manage.py migrate`
- + Viết chương trình đầu tiên:
+ + Viết chương trình ứng dụng home đầu tiên:
     + Trong file views.py:
     
     ```py
