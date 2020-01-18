@@ -20,3 +20,4 @@
     'home'
   ]
   ```
+  + Cập nhật project: `python manage.py migrate`
