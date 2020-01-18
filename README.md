@@ -1,5 +1,7 @@
 # Django
 
+_Lưu ý: Django trong project này là Django 3_
+
 ## Cài đặt
 ### Trên Windows 
 + Cài Python 3.7
@@ -72,6 +74,8 @@
     ## Tạo template:
     Mục đích tạo template trong Django là để tái sử dụng giao diện nhiều lần trong project và ứng dụng
     
+	Ví dụ: 
+	
     Trong thư mục home tạo:
     + templates/pages/base.html: Ý ở đây là template nền tảng
     
@@ -115,4 +119,8 @@
   ```
   
 + Chạy project: `python manage.py runserver`
+
+### Tạo Blog
+
+
 
