@@ -166,7 +166,7 @@ Sử dụng static file
 Nếu chạy sản phẩm demo trên máy local thì chỉ cần chạy dòng lệnh sau đây là có thể gọi static thoải mái: `python manage.py runserver --insecure` 
 
 Trên môi trường product như: Heroku, AWS, Openshift, PaaS,... nếu chỉ đơn thuần gọi cú pháp sử dụng
-các file static thì sẽ chương trình sẽ không tìm thấy các file hình ảnh, video, css, js,... Vì vậy, để giải quyết vấn đề đó thì có một giải pháp là cài thêm gói `whitenoise` và cấu hình file settings.py
+các file static thì chương trình sẽ không tìm thấy các file hình ảnh, video, css, js,... Vì vậy, để giải quyết vấn đề đó thì có một giải pháp là cài thêm gói `whitenoise` và cấu hình file settings.py
 
 ```
 pip install whitenoise
