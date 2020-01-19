@@ -449,15 +449,20 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
   + Trong file urls.py của project, thêm dòng code để cấu hình đường dẫn nơi lưu trữ:
 
   ```py
+  from django.views.static import serve
   if settings.DEBUG:
-      urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+  else:
+      urlpatterns += [
+          url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT})
+    ]
   ```
 
 + [Upload hình ảnh trong backend admin](upload):
 
   ![](images/upload-1.PNG)
 
-  _Lưu ý: Trong file settings.py của project thì dòng lệnh `DEBUG = true` để hiển thị hình ảnh bài viết._
+  _Lưu ý: Trong file settings.py của project thì phải để đúng dòng lệnh `DEBUG = true` hiển thị hình ảnh bài viết. Còn không thì static file sẽ không hoạt động. Nhưng có thể xem project Upload để tham khảo giải pháp._
 
 + Liệt kê bài viết:
 
