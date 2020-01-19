@@ -420,6 +420,63 @@ ALLOWED_HOSTS = ["*"]
 
 _Lưu ý: Khi đổi DEBUG = False thì các file static của admin sẽ không hoạt động. Vì vậy hãy cố gắng tìm cách giải quyết. Nhưng có thể tham khảo project 404._
 
+#### Upload image lên trang admin và hiển thị bài viết của ứng dụng blog
+
++ Trong ứng dụng blog tạo thêm thuộc tính image cho model:
+
+```py
+from django.db import models
+
+class Post(models.Model):
+    title   = models.CharField(max_length=100)
+    content = models.TextField()
+    date    = models.DateTimeField(auto_now_add=True)
+    image   = models.ImageField(null=True)
+    def __str__(self):
+        return self.title
+```
+
+Chạy dòng lệnh cập nhật model:
++ `python manage.py makemigrations`
++ `python manage.py migrate`
+
++ Cấu hình đường dẫn upload hình ảnh trong file settings.py của project:
+
+```py
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+```
+  + Trong file urls.py của project, thêm dòng code để cấu hình đường dẫn nơi lưu trữ:
+
+  ```py
+  if settings.DEBUG:
+      urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+  ```
+
++ [Upload hình ảnh trong backend admin](upload):
+
+  ![](images/upload-1.PNG)
+
+  _Lưu ý: Trong file settings.py của project thì dòng lệnh `DEBUG = true` để hiển thị hình ảnh bài viết._
+
++ Liệt kê bài viết:
+
+  Trong blog.html:
+
+  ```html
+    {% if post.image %}
+        <img src="{{post.image.url}}" width="500px" height="300px"> 
+    {% endif %} 
+  ```
+
+  Trong post.html:
+
+  ```html
+    {% if post.image %}
+        <img src="{{post.image.url}}" width="500px" height="300px"> 
+    {% endif %} 
+  ```
+
 
 
 
