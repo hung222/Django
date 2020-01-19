@@ -153,6 +153,41 @@ _Lưu ý: Django trong project này là Django 3_
 + Cập nhật lại project sau khi cập nhật xong ứng dụng: `python manage.py migrate`
 + Xem và kiểm tra cơ sở dữ liệu sau khi cập nhật xong project. Ở đây mình dùng SQLite DB
 
+#### Lưu trữ file metadata trong thư mục static trên môi trường product
+
+Sử dụng static file
+
+```
+{% load static %}
+...
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+```
+
+Nếu chạy sản phẩm demo trên máy local thì chỉ cần chạy dòng lệnh sau đây là có thể gọi static thoải mái: `python manage.py runserver --insecure` 
+
+Trên môi trường product như: Heroku, AWS, Openshift, PaaS,... nếu chỉ đơn thuần gọi cú pháp sử dụng
+các file static thì sẽ chương trình sẽ không tìm thấy các file hình ảnh, video, css, js,... Vì vậy, để giải quyết vấn đề đó thì có một giải pháp là cài thêm gói `whitenoise` và cấu hình file settings.py
+
+```
+pip install whitenoise
+```
+
+Cấu hình trong file settings.py thì có thể tham khảo như sau:
+
+```py
+MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    ...
+]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'home/static')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+```
+
 #### Tương tác với Cơ sở dữ liệu trong Django
 + Chạy dòng lệnh sau để tương tác với CSDL: `python manage.py shell`
 
