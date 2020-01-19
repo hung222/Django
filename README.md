@@ -372,7 +372,7 @@ STATICFILES_DIRS = (
     
     VD: `<a href="{% url 'blog' %}">Bài viết</a>`
 
-#### Tạo trang 404
+#### [Tạo trang 404](/404)
 Ở đây, tại ứng dụng home thì thực hiện một số công việc:
 + Tạo template home/templates/error.html:
 
@@ -409,6 +409,14 @@ urlpatterns = [
 handler400 = 'home.views.error404'
 handler500 = 'home.views.error500'
 ```
++ Chỉnh sửa cấu hình trong file settings.py của project:
+
+```py
+DEBUG = False
+ALLOWED_HOSTS = ["*"]
+```
+
+_Lưu ý: Khi đổi DEBUG = False thì các file static của admin sẽ không hoạt động. Vì vậy hãy cố gắng tìm cách giải quyết._
 
 
 
