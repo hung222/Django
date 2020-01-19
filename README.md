@@ -1,5 +1,7 @@
 # Django
 
+ Framework sử dụng mô hình MTV (Model-Template-View) nhưng cơ bản của nó là từ mô hình MVC (model-view-controller) 
+
 _Lưu ý: Django trong project này là Django 3_
 
 ## Cài đặt
