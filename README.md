@@ -315,6 +315,30 @@ _Lưu ý: Django trong project này là Django 3_
 
   ![](images/blog-3.PNG)
 
+  #### Hardcode URL trong Django 
+  Hardcoce là bất cứ những gì được gán cố định đối với những có thể sẽ thay đổi trong quá trình phát triển của phần mềm với mục đích nào đó.
+
+  VD: Đường dẫn URL: http://localhost:8000/blog/1, http://localhost:8000/java/spring-mvc/1, http://localhost:8000/categories/network/1,...
+
+  + Loại bỏ hardcode trong lập trình web Django:
+    + Thêm thuộc tính name trong mảng urlpatterns trong file urls.py của ứng dụng blog
+
+    ```py
+    from django.urls import path
+    from . import views
+
+    urlpatterns = [
+        path('', views.list, name="blog"),
+        path('<int:id>/', views.post, name = "post")
+    ]
+    ```
+
+    + Gọi đường dẫn với cú pháp tương đương.
+    
+    VD: `<a href="{% url 'blog' %}">Bài viết</a>`
+
+
+
 
 
 
