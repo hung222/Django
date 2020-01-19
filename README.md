@@ -372,6 +372,43 @@ STATICFILES_DIRS = (
     
     VD: `<a href="{% url 'blog' %}">Bài viết</a>`
 
+#### Tạo trang 404
+Ở đây, tại ứng dụng home thì thực hiện một số công việc:
++ Tạo template home/templates/error.html:
+
+```html
+{% extends "pages/base.html" %}
+
+{% block title %}Error{% endblock %}
+
+{% block content %} 
+    <h4>Your requested page, Not Found.</h4>
+{% endblock %}
+```
+
++ Tạo hàm render template home/templates/error.html trong thư mục home/views.py:
+
+```py
+def error404(request, exception):
+    return render(request, "pages/error.html")
+def error500(request):
+    return render(request, "pages/error.html")
+```
++ Tại file urls.py của project thì chỉnh sửa cấu hình:
+
+```py
+from django.contrib import admin
+from django.urls import path, include
+from django.conf.urls import handler400, handler500
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('home.urls')),
+    path('blog/', include('blog.urls'))
+]
+handler400 = 'home.views.error404'
+handler500 = 'home.views.error500'
+```
 
 
 
