@@ -174,6 +174,36 @@ _Lưu ý: Django trong project này là Django 3_
   >>> Post.objects.all()
   ```
 
+  #### Thiết kế hệ thống admin blog 
+  Mục đích: Quản lý user, group, hệ thống bài viết cho blog
+
+  + Tạo user, pass đăng nhập hệ thống admin của blog: `python manage.py createsuperuser`
+  + Chạy project: `python manage.py runserver`
+  + Truy cập trang admin: [http://localhost:8000/admin](http://localhost:8000/admin) và đăng nhập hệ thống
+  + Tạo chức năng quản trị bài viết:
+
+    Trong file admin.py của ứng dụng blog đã tạo trước viết mã:
+
+    ```py
+    from django.contrib import admin
+    from .models import Post
+
+    class PostAdmin(admin.ModelAdmin):
+      list_display  = ['title', 'date']
+      list_filter   = ['date']
+      search_fields = ['title']
+    admin.site.register(Post, PostAdmin)
+    ``` 
+
+    + title, date là những thuộc tính trong model Post đã tạo trên
+  + Kết quả:
+
+    ![Django Administrator](images/post-1.PNG)
+
+    ![Django Administrator](images/post-2.PNG)
+
+
+
 
 
 
