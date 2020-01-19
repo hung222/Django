@@ -450,6 +450,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
   ```py
   from django.views.static import serve
+
   if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
   else:
@@ -461,8 +462,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 + [Upload hình ảnh trong backend admin](upload):
 
   ![](images/upload-1.PNG)
-
-  _Lưu ý: Trong file settings.py của project thì phải để đúng dòng lệnh `DEBUG = true` hiển thị hình ảnh bài viết. Còn không thì static file sẽ không hoạt động. Nhưng có thể xem project Upload để tham khảo giải pháp._
 
 + Liệt kê bài viết:
 
