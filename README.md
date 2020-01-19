@@ -307,6 +307,14 @@ _Lưu ý: Django trong project này là Django 3_
           self.assertTemplateUsed(response, 'blog/post.html')
   ```
 
+  + Kết quả:
+
+  ![](images/blog-1.PNG)
+
+  ![](images/blog-2.PNG)
+
+  ![](images/blog-3.PNG)
+
 
 
 
