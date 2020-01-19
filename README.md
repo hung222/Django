@@ -202,6 +202,119 @@ _Lưu ý: Django trong project này là Django 3_
 
     ![Django Administrator](images/post-2.PNG)
 
+  #### Liệt kê danh sách bài viết và hiển thị chi tiết bài viết
+    + Tạo model DB cho bài viết:
+
+    ```py
+    from django.db import models
+    class Post(models.Model):
+        title   = models.CharField(max_length=100)
+        content = models.TextField()
+        date    = models.DateTimeField(auto_now_add=True)
+        def __str__(self):
+            return self.title
+    ```
+    + Trong file blog/views.py viết hai hàm hiển thị danh sách bài viết list và chi tiết bài viết post:
+
+    ```py
+    from django.shortcuts import render
+    from .models import Post
+
+    def list(request):
+        data = {'Posts': Post.objects.all().order_by("-date")}
+        return render(request, 'blog/blog.html', data)
+
+    def post(request, id):
+        post = Post.objects.get(id=id)
+        return render(request, 'blog/post.html', {'post' : post})
+    ```
+
+  + Tạo template bài viết: Tạo thư mục templates/blog chứa hai file template html: blog.html, post.html
+
+    Hai template này sẽ hiển thị dữ liệu render từ view
+
+    + blog.html
+
+    ```html
+    {% extends 'pages/base.html' %}
+    {% block title %}Blog Display{% endblock %}
+    {% block content %}
+      {% for post in Posts %}
+            <h5>{{post.date|date:"d/m/Y"}} - <a href="/blog/{{post.id}}">{{post.title}}</a></h5>
+      {% endfor %}
+    {% endblock %}
+    ```
+
+    + post.html
+
+    ```html
+    {% extends "pages/base.html" %}
+    {% block title %}{{post.title}}{% endblock %}
+    {% block content %}
+      <h3><a href="blog/{{post.id}}">{{post.title}}</a></h3>
+      <h6>on {{post.date}}</h6>
+      {{post.content|safe|linebreaks}}
+    {% endblock %}
+    ```
+  + Cấu hình URL trong urls.py của ứng dụng blog
+
+  ```py
+  from django.urls import path
+  from . import views
+
+  urlpatterns = [
+      path('', views.list),
+      path('<int:id>/', views.post)
+  ]
+  ```
+  + Cấu hình URL trong urls.py của project
+
+  ```py
+  from django.contrib import admin
+  from django.urls import path, include
+
+  urlpatterns = [
+      path('admin/', admin.site.urls),
+      path('', include('home.urls')),
+      path('blog/', include('blog.urls'))
+  ]
+  ```
+
+  + Viết Test case kiểm thử hai chức năng trên của blog:
+
+  ```py
+  from django.test import TestCase
+  from .models import Post
+
+  class BlogTest(TestCase):
+      def setUp(self):
+          Post.objects.create(
+              title="My Title",
+              content="This is a just test"
+          )
+      def test_string_representation(self):
+          post = Post(title="My entry title")
+          self.assertEqual(str(post), post.title)
+      def test_post_list_view(self):
+          response = self.client.get("/blog/")
+          self.assertEqual(response.status_code, 200)
+          self.assertContains(response, 'My Title')
+          self.assertTemplateUsed(response, 'blog/blog.html')
+      def test_post_detail_view(self):
+          response = self.client.get("/blog/1/")
+          self.assertEqual(response.status_code, 200)
+          self.assertContains(response, 'My Title')
+          self.assertTemplateUsed(response, 'blog/post.html')
+  ```
+
+
+
+
+
+
+
+
+
 
 
 
