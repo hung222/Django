@@ -540,7 +540,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     ```
 
 #### [Generic view](./generic-view) 
-Nếu viết các hàm xử lý view là hơi phức tạp thì Django có thư viện **generic view**, là một tập các class thư viện xử lý view hỗ trợ xử lý view dễ hơn, ngắn gọn hơn.
+Nếu viết các hàm xử lý view là hơi phức tạp thì Django có thư viện **generic view**, là một tập các class thư viện xử lý view hỗ trợ xử lý view nhanh hơn.
 
 Dưới đây là liệt kê các class trong thư viện **generic view**
 
