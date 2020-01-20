@@ -153,7 +153,7 @@ _Lưu ý: Django trong project này là Django 3_
 
 + Cập nhật ứng dụng blog sau khi tạo xong model: `python manage.py makemigrations blog`
 + Cập nhật lại project sau khi cập nhật xong ứng dụng: `python manage.py migrate`
-+ Xem và kiểm tra cơ sở dữ liệu sau khi cập nhật xong project. Ở đây mình dùng SQLite DB
++ Xem và kiểm tra cơ sở dữ liệu sau khi cập nhật xong project. Ở đây dùng SQLite DB
 
 #### Lưu trữ file metadata trong thư mục static trên môi trường product
 
