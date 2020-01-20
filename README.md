@@ -481,9 +481,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     {% endif %} 
   ```
 
-  #### Đăng ký - đăng nhập - đăng xuất
+  #### [Đăng ký - đăng nhập - đăng xuất](./login-register-logout)
   + Chức năng đăng ký:
-    + Tạo file form.py trong ứng dụng home:
+    + Tạo file **[form.py](login-register-logout/home/form.py)** trong ứng dụng home:
 
     ```py
     from django import forms
@@ -517,9 +517,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
                                                 email=self.cleaned_data['email'], 
                                                     password=self.cleaned_data['password1'])
     ```
-    + Tạo template cho chức năng đăng ký trong ứng dụng home theo đúng cú pháp: [register.html](login-register-logout/home/templates/pages/register.html)
-    + Tạo template cho chức năng đăng nhập trong ứng dụng home theo đúng cú pháp: [login.html](login-register-logout/home/templates/pages/login.html)
-    + Tạo chức năng xử lý view trong [home/views.py](./login-register-logout/home/views.py):
+    + Tạo template cho chức năng đăng ký trong ứng dụng home theo đúng cú pháp: **[register.html](login-register-logout/home/templates/pages/register.html)**
+    + Tạo template cho chức năng đăng nhập trong ứng dụng home theo đúng cú pháp: **[login.html](login-register-logout/home/templates/pages/login.html)**
+    + Tạo chức năng xử lý view trong **[home/views.py](./login-register-logout/home/views.py)**:
 
     ```py
     def register(request):
@@ -532,7 +532,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
       return render(request, 'pages/register.html', {'form':form})
     ```
 
-    + Cấu hình đường dẫn trong file [home/urls.py](./login-register-logout/home/urls.py):
+    + Cấu hình đường dẫn trong file **[home/urls.py](./login-register-logout/home/urls.py)**:
 
     ```py
     path('login/', auth_views.LoginView.as_view(template_name='pages/login.html'), name='login'),
