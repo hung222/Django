@@ -523,7 +523,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
                                                     password=self.cleaned_data['password1'])
     ```
     + Tạo template cho chức năng đăng ký trong ứng dụng home theo đúng cú pháp: [register.html](login-register-logout/home/templates/pages/register.html)
-    + Tạo template cho chức năng đăng nhập trong ứng dụng home theo đúng cú pháp: [register.html](login-register-logout/home/templates/pages/login.html)
+    + Tạo template cho chức năng đăng nhập trong ứng dụng home theo đúng cú pháp: [login.html](login-register-logout/home/templates/pages/login.html)
     + Tạo chức năng xử lý view trong [home/views.py](./login-register-logout/home/views.py):
 
     ```py
