@@ -5,11 +5,11 @@
 _Lưu ý: Django trong project này là Django 3_
 
 ## Cài đặt
-### Trên Windows 
+#### Trên Windows 
 + Cài Python 3.7
 + `pip install django`
 + Tạo project đầu tiên: `django-admin startproject mywebsite .`
-## Tạo ứng dụng:
+#### [Tạo ứng dụng đâu tiên](./first-app)
 + `python manage.py startapp home`
 + Khai báo ứng dụng home cho project tại file settings.py:
   
@@ -73,7 +73,7 @@ _Lưu ý: Django trong project này là Django 3_
     ]
     ```
     
-    ## Tạo template:
+    #### [Tạo template](./template)
     Mục đích tạo template trong Django là để tái sử dụng giao diện nhiều lần trong project và ứng dụng
     
 	Ví dụ: 
@@ -122,7 +122,7 @@ _Lưu ý: Django trong project này là Django 3_
   
 + Chạy project: `python manage.py runserver`
 
-### Tạo Blog
+#### Tạo Blog
 + Tạo app mới: `python manage.py startapp blog`
 + Cập nhật file settings.py tại dòng lệnh INSTALLED_APPS:
 
@@ -139,7 +139,7 @@ _Lưu ý: Django trong project này là Django 3_
 	]
 	```
 + Cập nhật lại project: `python manage.py migrate`
-#### Tạo model
+#### [Tạo model](./model)
 
 + Trong file models.py của app blog tạo model database:
 
@@ -211,7 +211,7 @@ STATICFILES_DIRS = (
   >>> Post.objects.all()
   ```
 
-  #### Thiết kế hệ thống admin blog 
+  #### [Thiết kế hệ thống admin blog](./admin)
   Mục đích: Quản lý user, group, hệ thống bài viết cho blog
 
   + Tạo user, pass đăng nhập hệ thống admin của blog: `python manage.py createsuperuser`
@@ -239,7 +239,7 @@ STATICFILES_DIRS = (
 
     ![Django Administrator](images/post-2.PNG)
 
-  #### Liệt kê danh sách bài viết và hiển thị chi tiết bài viết
+  #### [Liệt kê danh sách bài viết và hiển thị chi tiết bài viết](./blog)
     + Tạo model DB cho bài viết:
 
     ```py
@@ -420,7 +420,7 @@ ALLOWED_HOSTS = ["*"]
 
 _Lưu ý: Khi đổi DEBUG = False thì các file static của admin sẽ không hoạt động. Vì vậy hãy cố gắng tìm cách giải quyết. Nhưng có thể tham khảo project 404._
 
-#### Upload image lên trang admin và hiển thị bài viết của ứng dụng blog
+#### [Upload image lên trang admin và hiển thị bài viết của ứng dụng blog](./upload)
 
 + Trong ứng dụng blog tạo thêm thuộc tính image cho model:
 
