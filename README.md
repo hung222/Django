@@ -539,6 +539,44 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout')
     ```
 
+#### [Generic view](./generic-view) 
+Nếu viết các hàm xử lý view là hơi nặng thì Django có thư viện **generic view**, là một tập các class thư viện xử lý view hỗ trợ xử lý view dễ hơn, ngắn gọn hơn.
+
+Dưới đây là liệt kê các class trong thư viện **generic view**
+
+```py
+>>> import django.views.generic
+>>> dir(django.views.generic)
+
+['ArchiveIndexView', 'CreateView', 'DateDetailView', 'DayArchiveView', 
+   'DeleteView', 'DetailView', 'FormView', 'GenericViewError', 'ListView', 
+   'MonthArchiveView', 'RedirectView', 'TemplateView', 'TodayArchiveView', 
+   'UpdateView', 'View', 'WeekArchiveView', 'YearArchiveView', '__builtins__', 
+   '__doc__', '__file__', '__name__', '__package__', '__path__', 'base', 'dates', 
+   'detail', 'edit', 'list']
+```
+
+Trong file urls.py thì cấu hình và viết lệnh:
+
+```py
+from django.urls import path
+from django.views.generic import ListView, DetailView
+from . import views
+from .models import Post
+
+urlpatterns = [
+    path('', ListView.as_view(
+        queryset            = Post.objects.all().order_by("-date"),
+        template_name       = 'blog/blog.html',
+        context_object_name = 'Posts',
+        paginate_by         = 2,
+    ), name="blog"),
+    path('<int:pk>/', DetailView.as_view(
+        model = Post,
+        template_name = 'blog/post.html'
+    ), name = "post")
+]
+```
 
 
 
