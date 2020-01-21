@@ -580,7 +580,7 @@ urlpatterns = [
 
 #### [Thiết kế chức năng comment bài viết](./comment)
 
-+ [Cấu hình đường dẫn urls.py](https://github.com/haunt-hcm2015/Django/blob/master/comment/blog/urls.py):
++ [Cấu hình đường dẫn urls.py](/haunt-hcm2015/Django/blob/master/blob/master/comment/blog/urls.py):
 
 ```py
 urlpatterns = [
@@ -589,7 +589,7 @@ urlpatterns = [
 ]
 ```
 
-+ [Xây dựng model DB Comment trong models.py](https://github.com/haunt-hcm2015/Django/blob/master/comment/blog/models.py):
++ [Xây dựng model DB Comment trong models.py](/haunt-hcm2015/Django/blob/master/blob/master/comment/blog/models.py):
 
 ```py
 class Comment(models.Model):
@@ -600,7 +600,7 @@ class Comment(models.Model):
 ```
     + Cập nhật lại DB: `python manage.py makemigrations` và `python manage.py migrate`
 
-+ [Xây dựng chức năng lưu comment vào DB](https://github.com/haunt-hcm2015/Django/blob/master/comment/blog/forms.py):
++ [Xây dựng chức năng lưu comment vào DB](/haunt-hcm2015/Django/blob/master/blob/master/comment/blog/forms.py):
 
 ```py
 from django import forms
@@ -620,7 +620,7 @@ class CommentForm(forms.ModelForm):
         fields = ['content'] 
 ```
 
-+ [Xây dựng hàm xử lý yêu cầu gửi tới của views](https://github.com/haunt-hcm2015/Django/blob/master/comment/blog/views.py):
++ [Xây dựng hàm xử lý yêu cầu gửi tới của views](/haunt-hcm2015/Django/blob/master/blob/master/comment/blog/views.py):
 
 ```py
 from django.shortcuts import render, get_object_or_404
@@ -637,8 +637,7 @@ def post(request, pk):
     return render(request, "blog/post.html", {'post':post, 'form':form})
 ```
 
-+ [Liệt kê các bình luận của user trong hệ thống admin trong file admin.py của ứng dụng home](https://github.com/haunt-hcm2015/Django/blob/master/comment/blog/admin.py):
-
++ [Liệt kê các bình luận của user trong hệ thống admin trong file admin.py của ứng dụng home](/haunt-hcm2015/Django/blob/master/blob/master/comment/blog/admin.py):
 ```py
 from django.contrib import admin
 from .models import Post, Comment
