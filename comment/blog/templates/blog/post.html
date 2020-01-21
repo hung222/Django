@@ -1,0 +1,29 @@
+{% extends "pages/base.html" %}
+
+{% block title %}{{post.title}}{% endblock %}
+
+{% block content %}
+   <h3><a href="{% url 'post' post.id %}">{{post.title}}</a></h3>
+   <h6>on {{post.date}}</h6>
+   {{post.content|safe|linebreaks}}
+   {% if post.image %}
+        <img src="{{post.image.url}}" width="500px" height="300px"> 
+    {% endif %} 
+    <p>Comment: </p>
+    {% for comment in post.comments.all %}
+        <h4><strong>{{comment.author}}</strong></h4>
+        <h6><p>{{comment.date}}</p></h6>
+        <p>{{comment.content|linebreaks}}</p>
+    {% endfor %}
+
+    {% if user.username %}
+        <form action="{% url 'post' post.id %}" method="POST">
+            {% csrf_token %}
+            <p><label>Comment: </label></p>
+            {{form}}
+            <br/>
+            <input type="submit" value="Comment"/>
+        </form>
+    {% endif %}
+{% endblock %}
+

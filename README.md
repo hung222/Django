@@ -578,6 +578,82 @@ urlpatterns = [
 ]
 ```
 
+#### [Thiết kế chức năng comment bài viết](./comment)
+
++ [Cấu hình đường dẫn urls.py](./Django/comment/blog/urls.py):
+
+```py
+urlpatterns = [
+    ...
+    path('<int:pk>/', views.post, name="post")
+]
+```
+
++ [Xây dựng model DB Comment trong models.py](./Django/comment/blog/models.py):
+
+```py
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.TextField()
+    data = models.DateTimeField(auto_now_add=True)
+```
+    + Cập nhật lại DB: `python manage.py makemigrations` và `python manage.py migrate`
+
++ [Xây dựng chức năng lưu comment vào DB](./Django/comment/blog/forms.py):
+
+```py
+from django import forms
+from .models import Comment
+class CommentForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.author = kwargs.pop('author', None)
+        self.post   = kwargs.pop('post', None)
+        super().__init__(*args, **kwargs)
+    def save(self, commit=True):
+        comment        = super().save(commit=False)
+        comment.author = self.author
+        comment.post   = self.post
+        comment.save()
+    class Meta:
+        model  = Comment
+        fields = ['content'] 
+```
+
++ [Xây dựng hàm xử lý yêu cầu gửi tới của views](./Django/comment/blog/views.py):
+
+```py
+from django.shortcuts import render, get_object_or_404
+from .models import Post, Comment
+from .forms import CommentForm
+from django.http import HttpResponseRedirect
+def post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    form = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST, author=request.user, post=post)
+        if form.is_valid():
+            form.save()
+    return render(request, "blog/post.html", {'post':post, 'form':form})
+```
+
++ [Liệt kê các bình luận của user trong hệ thống admin trong file admin.py của ứng dụng home](./Django/comment/blog/admin.py):
+
+```py
+from django.contrib import admin
+from .models import Post, Comment
+
+class CommentInline(admin.StackedInline):
+    model = Comment
+class PostAdmin(admin.ModelAdmin):
+    list_display  = ['title', 'date']
+    list_filter   = ['date']
+    search_fields = ['title']
+    inlines       = [CommentInline] 
+admin.site.register(Post, PostAdmin)
+```
+
+
 
 
 

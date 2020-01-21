@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <title>{% block title%} {% endblock %}</title>
+        <style>
+            html, body{
+                height: 100%;
+                background-color: #f6f6f6;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="container-fluid">
+        <form action="." method="POST">
+            {% csrf_token %}
+                <p>{{ form.as_p }}</p>
+                <input type="submit" value="Đăng ký"/>
+        </form>
+    </div>
+    </body>
+</html>
